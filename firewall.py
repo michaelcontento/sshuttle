@@ -1,4 +1,4 @@
-import re, errno, socket, select, signal, struct
+import re, errno, socket, select, signal, struct, os
 import compat.ssubprocess as ssubprocess
 import helpers, ssyslog
 from helpers import *
