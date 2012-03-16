@@ -145,8 +145,13 @@ def _fill_oldctls(prefix):
     if not line:
         raise Fatal('%r returned no data' % (argv,))
 
-
+# Detect if there's another file that's used instead of the system default
+# -> That's usually the case for custom macs!
 KERNEL_FLAGS_PATH = '/Library/Preferences/SystemConfiguration/com.apple.Boot'
+KERNEL_FLAGS_EXTRA_PATH = '/Extra/com.apple.Boot'
+if os.path.exists(KERNEL_FLAGS_EXTRA_PATH + ".plist"):
+    KERNEL_FLAGS_PATH = KERNEL_FLAGS_EXTRA_PATH
+
 KERNEL_FLAGS_NAME = 'Kernel Flags'
 def _defaults_read_kernel_flags():
     argv = ['defaults', 'read', KERNEL_FLAGS_PATH, KERNEL_FLAGS_NAME]
